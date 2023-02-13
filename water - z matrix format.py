@@ -60,14 +60,14 @@ vqe_factory = VQEUCCFactory(estimator, ansatz, optimizer)
 algorithm = GroundStateEigensolver(converter, vqe_factory)
 es_result = algorithm.solve(as_problem)
 uccsd_energy = es_result.total_energies[0]
-print("Ground State Energy of O-H bonding: \n", uccsd_energy)
+print("Ground State Energy of O-H bonding at 1.08 A: \n", uccsd_energy, '\n')
 
 # --------------------------------------------------------------------
 # ************ Energy Calculation Over O - H bonding *****************
 # --------------------------------------------------------------------
 #   Molecule coordinates in z-matrices (compact) format
 H2O = 'H; O 1 1.08; H 2 {} 1 104.5'
-distances = [x * 0.05 + 0.650 for x in range(40)]
+distances = [x * 0.05 + 0.600 for x in range(40)]
 energies = np.empty(len(distances))
 classical_energy = []
 uccsd_energy = []
@@ -100,7 +100,7 @@ print('\n \n \n', 'Run Time: ', runtime, 'sec', ' or ', runtime / 60, 'min', '\n
 # --------------------------------------------------------------------
 # ************ Energy Calculation Over O - H bonding *****************
 # --------------------------------------------------------------------
-plt.plot(distances, uccsd_energy, color='red', label='UCCSD')
+plt.plot(distances, uccsd_energy, color='red', label='UCCSD Energy')
 plt.plot(distances, classical_energy, color='blue', label='Exact Energy')
 plt.grid(True, linestyle='-.', linewidth=0.5, which='major')
 plt.title("Ground State Energy Curve of Water Molecule")
